@@ -1468,6 +1468,20 @@ impl Compiler {
                     }
                     self.compile_expr(&args[0], instrs)?;
                     instrs.push(self.create_instr("len", serde_json::json!({}), meta));
+                } else if function == "parallel_map" {
+                    if args.len() != 2 {
+                        bail!("parallel_map() expects exactly 2 arguments: array and lambda");
+                    }
+                    // Compile the array first, then the lambda (which pushes
+                    // its generated function name as a string). The VM's
+                    // PARALLEL_MAP instruction pops both.
+                    self.compile_expr(&args[0], instrs)?;
+                    self.compile_expr(&args[1], instrs)?;
+                    instrs.push(self.create_instr(
+                        "parallel_map",
+                        serde_json::json!({}),
+                        meta,
+                    ));
                 } else if function == "print" {
                     self.all_permissions.insert("io.print".to_string());
                     for arg in args {

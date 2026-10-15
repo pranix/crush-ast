@@ -142,6 +142,8 @@ pub const STR_TO_UPPER: u8 = 0xB2;
 pub const STR_TO_LOWER: u8 = 0xB3;
 pub const STR_TRIM: u8 = 0xB4;
 
+pub const PARALLEL_MAP: u8 = 0xB9;
+
 pub const HALT: u8 = 0xFF;
 
 /// CRUSH-32: map an AI-opcode byte (0x90-0x99) to its `ai_native.<kind>`
@@ -264,7 +266,7 @@ pub fn operand_kind(opcode: u8) -> Option<OperandKind> {
         CAP_CALL => Some(OperandKind::Cap),
         CALL => Some(OperandKind::Func),
         EXEC_LANG | GET_FIELD | SET_FIELD | CAST | AI_QUERY | AI_SYNTHESIZE | AI_AGENT_DELEGATION | AI_SEMANTIC_MATCH | AI_LEARNING_LOOP | AI_CONTEXT_AWARE | AI_TOOLCHAIN | AI_GOAL_DECLARATION | AI_PROGRESS_UPDATE | AI_KNOWLEDGE_SHARING | DOM_QUERY | DOM_GET | DOM_SET | DOM_CREATE | DOM_REMOVE | DOM_CHILD | DOM_PARENT | DOM_ATTR | DOM_TEXT | DOM_EVENT => Some(OperandKind::Str),
-        NEW_OBJ | MATH_POW | MATH_SQRT | MATH_ABS | MATH_ROUND | MATH_FLOOR | MATH_CEIL | VEC_ADD | VEC_DOT | MAT_MUL | STR_STARTS_WITH | STR_ENDS_WITH | STR_TO_UPPER | STR_TO_LOWER | STR_TRIM => Some(OperandKind::None),
+        NEW_OBJ | MATH_POW | MATH_SQRT | MATH_ABS | MATH_ROUND | MATH_FLOOR | MATH_CEIL | VEC_ADD | VEC_DOT | MAT_MUL | STR_STARTS_WITH | STR_ENDS_WITH | STR_TO_UPPER | STR_TO_LOWER | STR_TRIM | PARALLEL_MAP => Some(OperandKind::None),
         PICK | ROLL => Some(OperandKind::Count),
         NEW_ARRAY | NEW_TUPLE | NEW_LIST | NEW_VECTOR | NEW_SET => Some(OperandKind::Count),
         _ => None,

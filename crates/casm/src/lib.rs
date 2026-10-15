@@ -142,6 +142,8 @@ pub enum OpCode {
     Index,
     /// Frontend alias for collection length.
     Len,
+    /// Parallel map: array, fn-name -> array (results in order).
+    ParallelMap,
     /// Frontend array append operation.
     ArrayPush,
     /// Frontend array pop operation.
@@ -432,6 +434,7 @@ impl Instruction {
             "arr_pop" => Ok(OpCode::ArrPop),
             "index" => Ok(OpCode::Index),
             "len" => Ok(OpCode::Len),
+            "parallel_map" => Ok(OpCode::ParallelMap),
             "array_push" => Ok(OpCode::ArrayPush),
             "array_pop" => Ok(OpCode::ArrayPop),
             "make_range" => Ok(OpCode::MakeRange),
